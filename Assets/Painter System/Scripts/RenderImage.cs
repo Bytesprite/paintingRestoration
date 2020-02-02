@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
-//Push SPACE to render an PNG to the project folder under Renders
 public class RenderImage : MonoBehaviour{
     [SerializeField]
     Camera renderCamera;
@@ -10,48 +10,52 @@ public class RenderImage : MonoBehaviour{
     int renderNumber = 0;
     string prefsKey = "RenderNumber";
 
+    List<Texture2D> masterpieces = new List<Texture2D>();
+
     private void OnEnable() {
         RoundController.OnRoundEnd += RoundEnd;
+        RoundController.OnGameEnd += ExportImages;
     }
 
     private void OnDisable() {
         RoundController.OnRoundEnd -= RoundEnd;
     }
 
-    public void ExportImage() {
-        Debug.Log("Exporting...");
-        if(PlayerPrefs.HasKey(prefsKey)){
-            renderNumber = PlayerPrefs.GetInt(prefsKey) + 1;
-        }
+    public void ExportImages() {;
+        foreach (Texture2D painting in masterpieces) {
+            if (PlayerPrefs.HasKey(prefsKey)) {
+                renderNumber = PlayerPrefs.GetInt(prefsKey) + 1;
+            }
 
-        byte[] bytes = Render().EncodeToPNG();
-        if(!Directory.Exists(Application.dataPath + "/Renders")) {
-            Directory.CreateDirectory(Application.dataPath + "/Renders");
-        }
+            //This is a heavy statement & causes a fram stutter; for optimisation could save all textures and Export them at end of game
+            byte[] bytes = painting.EncodeToPNG();
+            if (!Directory.Exists(Application.dataPath + "/Renders")) {
+                Directory.CreateDirectory(Application.dataPath + "/Renders");
+            }
 
-        try {
-            File.WriteAllBytes(Application.dataPath + "/Renders/" + fileName + renderNumber + ".png", bytes);
+            try {
+                File.WriteAllBytes(Application.dataPath + "/Renders/" + fileName + renderNumber + ".png", bytes);
+            }
+            catch (System.Exception ex) {
+                Debug.LogError(ex);
+                return;
+            }
+            PlayerPrefs.SetInt(prefsKey, renderNumber);
+            PlayerPrefs.Save();
         }
-        catch (System.Exception ex) {
-            Debug.LogError(ex);
-            return;
-        }
-        PlayerPrefs.SetInt(prefsKey, renderNumber);
-        PlayerPrefs.Save();
-        Debug.Log("Render exported to: " + Application.dataPath + "/Renders/" + fileName + renderNumber);
-
     }
 
 
-    public Texture2D Render() {
+    public void RenderAndStore() {
         Texture2D render = new Texture2D(1920, 1080, TextureFormat.ARGB32, false);
         RenderTexture.active = renderCamera.targetTexture;
         render.ReadPixels(new Rect(0, 0, renderCamera.targetTexture.width, renderCamera.targetTexture.height),0,0);
         render.Apply();
-        return render;
+
+        masterpieces.Add(render);
     }
 
     private void RoundEnd() {
-        renderCamera.GetComponent<SetMaterialsUnlitBeforeRender>().SetShaderSwitchFlag(ExportImage);
+        renderCamera.GetComponent<SetMaterialsUnlitBeforeRender>().SetShaderSwitchFlag(RenderAndStore);
     }
 }

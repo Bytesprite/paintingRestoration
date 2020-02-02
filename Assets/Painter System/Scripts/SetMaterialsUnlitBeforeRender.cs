@@ -25,7 +25,6 @@ public class SetMaterialsUnlitBeforeRender : MonoBehaviour{
                 foreach (ShaderPair pair in shaderPairs) {
                     if (renderer.material.shader == pair.litShader) {
                         renderer.material.shader = pair.unlitShader;
-                        Debug.Log("Swapping shaders in " + renderer.gameObject.name);
                     }
                 }
             }

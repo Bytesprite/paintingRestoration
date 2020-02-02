@@ -42,13 +42,21 @@ public class Tool : MonoBehaviour, IStateMachine{
 
         Material materialInstance = new Material(material);
         Brush randomBrush = brushes[Random.Range((int)0, (int)brushes.Length)];
-        color = new Color(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f));
+        color = ColorController.GetCurrentColor();//new Color(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f));
         materialInstance.SetColor("_Color", color);
 
         shotInstance.GetComponent<ToolShot>().SetValues(randomBrush, materialInstance);
     }
 
+    public void MoveToNextState() {
+        CurrentState = currentState.NextState;
+    }
+
     class Default : IState {
+        public IState NextState{
+            get { return new ExitScene(); }
+        }
+
         public void OnEnter(IStateMachine controller) {
             Cursor.visible = false;
         }
@@ -76,6 +84,10 @@ public class Tool : MonoBehaviour, IStateMachine{
     }
 
     class EnterScene : IState {
+        public IState NextState {
+            get { return new Default(); }
+        }
+
         public void OnEnter(IStateMachine controller) {
 
         }
@@ -90,8 +102,18 @@ public class Tool : MonoBehaviour, IStateMachine{
     }
 
     class ExitScene : IState {
-        public void OnEnter(IStateMachine controller) {
+        public IState NextState {
+            get { return new EnterScene(); }
+        }
 
+        public void OnEnter(IStateMachine controller) {
+            Tool tool = controller as Tool;
+            if (tool == null)
+                return;
+
+            if(tool.GetComponent<Rigidbody>())
+                tool.GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(tool.gameObject, 2);
         }
 
         public void OnExit(IStateMachine controller) {
