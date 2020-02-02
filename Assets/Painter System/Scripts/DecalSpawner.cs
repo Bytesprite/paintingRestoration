@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DecalSpawner : MonoBehaviour{
     [SerializeField]
     Transform spawnParent;
     int spriteNumber = 0;
+    List<GameObject> currentDecals = new List<GameObject>();
+
+    private void OnEnable() {
+        RoundController.OnRoundCleanup += DestroyCurrentDecals;
+    }
+
+    private void OnDisable() {
+        RoundController.OnRoundCleanup -= DestroyCurrentDecals;
+    }
 
     public void Spawn(Vector3 worldPosition, Vector2 size, float rotation, Material material, Sprite spriteDecal) {
         GameObject sprite = new GameObject("Paint", new System.Type[] { typeof (SpriteRenderer)});
@@ -17,13 +25,23 @@ public class DecalSpawner : MonoBehaviour{
         sprite.transform.position = worldPosition;
         sprite.transform.localScale = new Vector3(size.x * 0.1f,size.y * 0.1f, 1);
 
-        if (spawnParent)
+        if (spawnParent) {
             sprite.transform.parent = spawnParent;
+            sprite.transform.localPosition = new Vector3(sprite.transform.localPosition.x, sprite.transform.localPosition.y, 0);
+        }
 
-        sprite.transform.localRotation = Quaternion.Euler(0, 0, rotation);
+        sprite.transform.localRotation = Quaternion.Euler(0, 180, rotation);
+        currentDecals.Add(sprite);
 
         if (spriteNumber >= 10) {
-
+            //Perhaps flatten the decals here for optimisation purposes
         }
+    }
+
+    public void DestroyCurrentDecals() {
+        foreach (GameObject decal in currentDecals) {
+            Destroy(decal);
+        }
+        currentDecals.Clear();
     }
 }

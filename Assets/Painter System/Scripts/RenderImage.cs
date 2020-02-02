@@ -10,6 +10,14 @@ public class RenderImage : MonoBehaviour{
     int renderNumber = 0;
     string prefsKey = "RenderNumber";
 
+    private void OnEnable() {
+        RoundController.OnRoundEnd += RoundEnd;
+    }
+
+    private void OnDisable() {
+        RoundController.OnRoundEnd -= RoundEnd;
+    }
+
     public void ExportImage() {
         Debug.Log("Exporting...");
         if(PlayerPrefs.HasKey(prefsKey)){
@@ -43,9 +51,7 @@ public class RenderImage : MonoBehaviour{
         return render;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)){
-            renderCamera.GetComponent<SetMaterialsUnlitBeforeRender>().SetShaderSwitchFlag(ExportImage);
-        }
+    private void RoundEnd() {
+        renderCamera.GetComponent<SetMaterialsUnlitBeforeRender>().SetShaderSwitchFlag(ExportImage);
     }
 }

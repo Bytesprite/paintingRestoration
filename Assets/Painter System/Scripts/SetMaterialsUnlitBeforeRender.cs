@@ -19,13 +19,14 @@ public class SetMaterialsUnlitBeforeRender : MonoBehaviour{
         if (!switchShadersThisFrame)
             return;
 
-        Debug.Log("Swapping shaders...");
         foreach (GameObject obj in objectsToSetUnlit) {
             Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
             foreach (Renderer renderer in renderers) {
                 foreach (ShaderPair pair in shaderPairs) {
-                    if (renderer.material.shader == pair.litShader)
+                    if (renderer.material.shader == pair.litShader) {
                         renderer.material.shader = pair.unlitShader;
+                        Debug.Log("Swapping shaders in " + renderer.gameObject.name);
+                    }
                 }
             }
         }

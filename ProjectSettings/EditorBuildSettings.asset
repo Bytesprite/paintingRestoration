@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PaintStudio.unity
+    guid: b54725b3753aaf443ac74820a701bee5
   m_configObjects: {}
