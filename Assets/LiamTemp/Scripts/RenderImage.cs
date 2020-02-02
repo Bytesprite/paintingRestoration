@@ -4,13 +4,14 @@ using UnityEngine;
 //Push SPACE to render an PNG to the project folder under Renders
 public class RenderImage : MonoBehaviour{
     [SerializeField]
-    RenderTexture renderTexture;
+    Camera renderCamera;
     [SerializeField]
     string fileName;
     int renderNumber = 0;
     string prefsKey = "RenderNumber";
 
     public void ExportImage() {
+        Debug.Log("Exporting...");
         if(PlayerPrefs.HasKey(prefsKey)){
             renderNumber = PlayerPrefs.GetInt(prefsKey) + 1;
         }
@@ -29,21 +30,22 @@ public class RenderImage : MonoBehaviour{
         }
         PlayerPrefs.SetInt(prefsKey, renderNumber);
         PlayerPrefs.Save();
-        Debug.Log("Render exported to: " + Application.dataPath + "/Renders/" + fileName);
+        Debug.Log("Render exported to: " + Application.dataPath + "/Renders/" + fileName + renderNumber);
 
     }
 
+
     public Texture2D Render() {
         Texture2D render = new Texture2D(1920, 1080, TextureFormat.ARGB32, false);
-        RenderTexture.active = renderTexture;
-        render.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height),0,0);
+        RenderTexture.active = renderCamera.targetTexture;
+        render.ReadPixels(new Rect(0, 0, renderCamera.targetTexture.width, renderCamera.targetTexture.height),0,0);
         render.Apply();
         return render;
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)){
-            ExportImage();
+            renderCamera.GetComponent<SetMaterialsUnlitBeforeRender>().SetShaderSwitchFlag(ExportImage);
         }
     }
 }
