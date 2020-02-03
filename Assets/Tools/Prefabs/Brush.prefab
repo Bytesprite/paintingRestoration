@@ -68,11 +68,11 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: d2773926a059d1c41a57da605764bb14, type: 2}
   brushes: []
   shotSpawnPoint: {fileID: 4500369062393000883}
+  shotsPerSecond: 4
+  forceAlpha: 0
+  forcedAlpha: 0
   shotObject: {fileID: 0}
-  line: {fileID: 0}
-  hitPos: {x: 0, y: 0, z: 0}
-  currLines: 0
-  currVertex: 0
+  verticesPerSecond: 4
 --- !u!1 &9038539980304692580
 GameObject:
   m_ObjectHideFlags: 0

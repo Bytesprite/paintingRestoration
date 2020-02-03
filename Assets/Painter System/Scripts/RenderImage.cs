@@ -52,6 +52,7 @@ public class RenderImage : MonoBehaviour{
         render.ReadPixels(new Rect(0, 0, renderCamera.targetTexture.width, renderCamera.targetTexture.height),0,0);
         render.Apply();
 
+        WallCanvas.AddPainting(render);
         masterpieces.Add(render);
     }
 

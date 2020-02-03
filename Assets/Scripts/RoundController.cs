@@ -49,23 +49,21 @@ public class RoundController : MonoBehaviour {
         }
     }
 
-    private void Awake() {
+    private void OnEnable() {
         NewPaintingList();
-        StartCoroutine(RoundCounter());
         canvasAnimator = canvasGroup.GetComponent<Animator>();
         originalCanvasAnimator = originalCanvasGroup.GetComponent<Animator>();
+
+        StartCoroutine(RoundCounter());
     }
 
     IEnumerator RoundCounter() {
-        yield return new WaitForSeconds(betweenRoundTime);
         if(OnRoundCleanup != null)
             OnRoundCleanup.Invoke();
 
         NewPainting();
         NewTool();
         canvasAnimator.SetBool("Active", true);
-        
-
         yield return new WaitForSeconds(roundTime);
 
         if (OnRoundEnd != null)
@@ -82,6 +80,8 @@ public class RoundController : MonoBehaviour {
             EndGame();
         else
             StartCoroutine(RoundCounter());
+
+        yield return new WaitForSeconds(betweenRoundTime);
     }
 
     void NewPaintingList() {
@@ -122,5 +122,6 @@ public class RoundController : MonoBehaviour {
 
     void EndGame() {
         OnGameEnd.Invoke();
+        GameController.Instance.MoveToNextState();
     }
 }
