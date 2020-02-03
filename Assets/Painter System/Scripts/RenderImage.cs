@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
-using Client;
 
 public class RenderImage : MonoBehaviour{
     [SerializeField]
@@ -42,7 +41,7 @@ public class RenderImage : MonoBehaviour{
                 return;
             }
  
-            Client.Client.Send(fullPath);
+            //Client.Client.Send(fullPath);
 
             PlayerPrefs.SetInt(prefsKey, renderNumber);
             PlayerPrefs.Save();

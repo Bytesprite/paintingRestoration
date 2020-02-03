@@ -42,7 +42,6 @@ public class LineTool : Tool
             currVertex = 1;
         }
         
-        Debug.Log("Checking for hit");
         Ray ray = new Ray(shotSpawnPoint.position, shotSpawnPoint.forward);
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit)) //, LayerMask.NameToLayer("DecalPlane")))
