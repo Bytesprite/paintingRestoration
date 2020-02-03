@@ -55,6 +55,8 @@ MonoBehaviour:
     size: {x: 1, y: 1}
   shotSpawnPoint: {fileID: 4500369062393000883}
   shotsPerSecond: 9
+  forceAlpha: 1
+  forcedAlpha: 0.68
   shotObject: {fileID: 3638734468326823636, guid: 63398971a3fb2e54ebb564c732909b6a,
     type: 3}
 --- !u!54 &-2949464292260265584

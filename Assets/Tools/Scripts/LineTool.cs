@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class LineTool : Tool
 {
-    public LineRenderer line;
-    public Vector3 hitPos;
-    public int currLines;
-    public int currVertex;
+    private LineRenderer line;
+    private Vector3 hitPos;
+    private int currLines;
+    private int currVertex;
     private float startWidth_ = 0.03f;
     private float endWidth_ = 0.03f;
     private bool useWorldSpace_ = false;
     private int numCapVertices_ = 20;
+    public float verticesPerSecond = 4;
+    private float secondsBetweenVertices;
+    private float timeOfLastVertex;
 
     const float distanceBetweenVertices = 0.03f;
 
@@ -22,6 +25,7 @@ public class LineTool : Tool
 
     private void OnEnable()
     {
+        secondsBetweenVertices = 1 / verticesPerSecond;
         RoundController.OnRoundEnd += this.FireOff;
     }
     private void OnDisable()
@@ -52,6 +56,7 @@ public class LineTool : Tool
             if (decalSpawner)
                 decalSpawner.Spawn(material, line);
 
+            timeOfLastVertex = Time.time;
             line.SetPosition(0, hitPos);
             line.SetPosition(currVertex, hitPos);
         }
@@ -87,7 +92,9 @@ public class LineTool : Tool
                 //hitPos = hit.transform.TransformPoint(hit.point);
 
                 //if (Random.value > 0.9f) //janky
-                if (Vector3.Distance(hitPos, line.GetPosition(currVertex - 1)) >= distanceBetweenVertices)
+                // If we're far enough or waited long enough, new vertex
+                if (Vector3.Distance(hitPos, line.GetPosition(currVertex - 1)) >= distanceBetweenVertices
+                    || Time.time > timeOfLastVertex + secondsBetweenVertices)
                 {
                     currVertex++;
                     line.positionCount = line.positionCount + 1;

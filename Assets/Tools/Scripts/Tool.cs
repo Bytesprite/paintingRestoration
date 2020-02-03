@@ -27,10 +27,13 @@ public class Tool : MonoBehaviour, IStateMachine{
     public float shotsPerSecond = 4;
     private float secondsBetweenShots;
     private float timeOfLastShot;
+    public bool forceAlpha = false;
+    public float forcedAlpha = 0;
     [SerializeField]
     GameObject shotObject;
 
     private void Awake() {
+        secondsBetweenShots = 1 / shotsPerSecond;
         currentState = new Default();
     }
 
@@ -47,6 +50,8 @@ public class Tool : MonoBehaviour, IStateMachine{
         Material materialInstance = new Material(material);
         Brush randomBrush = brushes[Random.Range((int)0, (int)brushes.Length)];
         color = ColorController.GetCurrentColor();//new Color(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f));
+        if (forceAlpha)
+            color.a = forcedAlpha;
         materialInstance.SetColor("_Color", color);
 
         timeOfLastShot = Time.time;
@@ -57,7 +62,6 @@ public class Tool : MonoBehaviour, IStateMachine{
     }
     virtual public void FireContinue() //Mouse continuing to be down
     {
-        secondsBetweenShots = 1 / shotsPerSecond;
         if (Time.time > timeOfLastShot + secondsBetweenShots)
         {
             Fire();
