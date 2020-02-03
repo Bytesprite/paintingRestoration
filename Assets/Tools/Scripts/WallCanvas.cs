@@ -26,4 +26,8 @@ public class WallCanvas : MonoBehaviour{
         }
         paintingNumber++;
     }
+
+    public static void ResetPaintingNumber() {
+        paintingNumber = 0;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using Client;
 
 public class RenderImage : MonoBehaviour{
     [SerializeField]
@@ -28,18 +29,21 @@ public class RenderImage : MonoBehaviour{
             }
 
             //This is a heavy statement & causes a fram stutter; for optimisation could save all textures and Export them at end of game
-            byte[] bytes = painting.EncodeToPNG();
+            byte[] bytes = painting.EncodeToJPG();
             if (!Directory.Exists(Application.dataPath + "/Renders")) {
                 Directory.CreateDirectory(Application.dataPath + "/Renders");
             }
-
+            string fullPath = Application.dataPath + "/Renders/" + fileName + renderNumber + ".jpg";
             try {
-                File.WriteAllBytes(Application.dataPath + "/Renders/" + fileName + renderNumber + ".png", bytes);
+                File.WriteAllBytes(fullPath, bytes);
             }
             catch (System.Exception ex) {
                 Debug.LogError(ex);
                 return;
             }
+ 
+            Client.Client.Send(fullPath);
+
             PlayerPrefs.SetInt(prefsKey, renderNumber);
             PlayerPrefs.Save();
         }

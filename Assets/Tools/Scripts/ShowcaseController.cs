@@ -6,6 +6,7 @@ public class ShowcaseController : MonoBehaviour{
     void Update(){
         if (Input.GetMouseButtonDown(1)) {
             GameController.Instance.MoveToNextState();
+            WallCanvas.ResetPaintingNumber();
         }
     }
 }

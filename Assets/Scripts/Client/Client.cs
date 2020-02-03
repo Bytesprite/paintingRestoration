@@ -2,10 +2,10 @@
 using System.Net.Sockets;
 using System.Drawing;
 using System.IO;
-
+//
 namespace Client
 {
-   class Client
+   public class Client
    {
       const int maxByteArray = 102400; 
       const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000; //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
@@ -15,7 +15,7 @@ namespace Client
       //    Send(".\\images\\BENCHMARK_CLIENT.jpg");
       //    Read(".\\images\\BENCHMARK_SERVER.jpg", "BENCHMARK_SERVER");
       // }
-      static void Send(string filePathName)
+      public static void Send(string filePathName)
       {
          // filePathName: Where do you want image to be saved, remember Windows filepath slashes:  ".\\images\\1.jpg"
          TcpClient client = new TcpClient(serverIPAddress, serverPort);

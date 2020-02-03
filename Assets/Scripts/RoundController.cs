@@ -78,10 +78,10 @@ public class RoundController : MonoBehaviour {
 
         if (nextPaintings.Count == 0)
             EndGame();
-        else
+        else {
+            yield return new WaitForSeconds(betweenRoundTime);
             StartCoroutine(RoundCounter());
-
-        yield return new WaitForSeconds(betweenRoundTime);
+        }
     }
 
     void NewPaintingList() {
