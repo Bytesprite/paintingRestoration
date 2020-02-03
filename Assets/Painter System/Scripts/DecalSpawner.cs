@@ -5,6 +5,7 @@ public class DecalSpawner : MonoBehaviour{
     [SerializeField]
     Transform spawnParent;
     int spriteNumber = 0;
+    int lineNumber = 0;
     List<GameObject> currentDecals = new List<GameObject>();
 
     private void OnEnable() {
@@ -34,6 +35,19 @@ public class DecalSpawner : MonoBehaviour{
         currentDecals.Add(sprite);
 
         if (spriteNumber >= 10) {
+            //Perhaps flatten the decals here for optimisation purposes
+        }
+    }
+    public void Spawn(Material material, LineRenderer line) {
+        lineNumber++;
+
+        if (spawnParent) {
+            line.transform.parent = spawnParent;
+        }
+
+        currentDecals.Add(line.gameObject);
+
+        if (lineNumber >= 10) {
             //Perhaps flatten the decals here for optimisation purposes
         }
     }

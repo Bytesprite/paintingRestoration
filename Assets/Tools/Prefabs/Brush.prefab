@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8169888621376303609}
-  - component: {fileID: 832794136}
   - component: {fileID: -2949464292260265584}
+  - component: {fileID: 3696060458868756206}
   m_Layer: 10
   m_Name: Brush
   m_TagString: Untagged
@@ -34,28 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &832794136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7964556048247748979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3103ee097d7474ab174154fe27187e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  material: {fileID: 2100000, guid: ea202507df1dba7458c0d493b1251045, type: 2}
-  brushes:
-  - decal: {fileID: 21300000, guid: bcb7c47de0d1501499e3a31cad767913, type: 3}
-    size: {x: 1, y: 1}
-  shotSpawnPoint: {fileID: 4500369062393000883}
-  shotObject: {fileID: 3638734468326823636, guid: 744bd12c62e07764eb317a7c3f9cb539,
-    type: 3}
 --- !u!54 &-2949464292260265584
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72,6 +50,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3696060458868756206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7964556048247748979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec86cb237703fac46929ee7e66833442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  material: {fileID: 2100000, guid: d2773926a059d1c41a57da605764bb14, type: 2}
+  brushes: []
+  shotSpawnPoint: {fileID: 4500369062393000883}
+  shotObject: {fileID: 0}
+  line: {fileID: 0}
+  hitPos: {x: 0, y: 0, z: 0}
+  currLines: 0
+  currVertex: 0
 --- !u!1 &9038539980304692580
 GameObject:
   m_ObjectHideFlags: 0

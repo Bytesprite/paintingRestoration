@@ -17,12 +17,16 @@ public class Tool : MonoBehaviour, IStateMachine{
     [SerializeField]
     LayerMask layerMask = new LayerMask();
     [SerializeField]
-    Material material;
+    protected Material material;
     [SerializeField]
     Brush[] brushes;
     Color color;
     [SerializeField]
-    Transform shotSpawnPoint;
+    protected Transform shotSpawnPoint;
+    [SerializeField]
+    public float shotsPerSecond = 4;
+    private float secondsBetweenShots;
+    private float timeOfLastShot;
     [SerializeField]
     GameObject shotObject;
 
@@ -34,7 +38,7 @@ public class Tool : MonoBehaviour, IStateMachine{
         currentState.Run(this);
     }
 
-    public void Fire() {
+    virtual public void Fire() {
         GameObject shotInstance = Instantiate(shotObject, shotSpawnPoint.position, Quaternion.identity);
         shotInstance.transform.forward = shotSpawnPoint.forward;
         if (!shotInstance.GetComponent<ToolShot>())
@@ -45,9 +49,20 @@ public class Tool : MonoBehaviour, IStateMachine{
         color = ColorController.GetCurrentColor();//new Color(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f));
         materialInstance.SetColor("_Color", color);
 
+        timeOfLastShot = Time.time;
         shotInstance.GetComponent<ToolShot>().SetValues(randomBrush, materialInstance);
     }
-
+    virtual public void FireOff() //Mouse Up
+    {
+    }
+    virtual public void FireContinue() //Mouse continuing to be down
+    {
+        secondsBetweenShots = 1 / shotsPerSecond;
+        if (Time.time > timeOfLastShot + secondsBetweenShots)
+        {
+            Fire();
+        }
+    }
     public void MoveToNextState() {
         CurrentState = currentState.NextState;
     }
@@ -79,6 +94,14 @@ public class Tool : MonoBehaviour, IStateMachine{
 
             if (Input.GetMouseButtonDown(0)) {
                 tool.Fire();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                tool.FireOff();
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                tool.FireContinue();
             }
         }
     }

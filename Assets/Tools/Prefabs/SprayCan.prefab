@@ -60,6 +60,8 @@ MonoBehaviour:
   - decal: {fileID: 21300000, guid: b616ce017ebfc974dae1c53add8d20a9, type: 3}
     size: {x: 0.6, y: 0.6}
   shotSpawnPoint: {fileID: 3758205156567806225}
+  shotsPerSecond: 15
+  secondsBetweenShots: 0.02
   shotObject: {fileID: 3638734468326823636, guid: 744bd12c62e07764eb317a7c3f9cb539,
     type: 3}
 --- !u!54 &1152634411888034193
