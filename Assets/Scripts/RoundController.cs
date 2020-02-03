@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class RoundController : MonoBehaviour {
-    float roundTime = 10;
+    float roundTime = 20;
     float betweenRoundTime = 2;
     float roundEndTime = 2;
 
@@ -50,7 +50,6 @@ public class RoundController : MonoBehaviour {
     }
 
     private void OnEnable() {
-        Debug.Log("RoundBeginning");
         NewPaintingList();
         canvasAnimator = canvasGroup.GetComponent<Animator>();
         originalCanvasAnimator = originalCanvasGroup.GetComponent<Animator>();

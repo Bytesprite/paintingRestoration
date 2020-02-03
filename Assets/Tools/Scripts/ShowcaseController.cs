@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShowcaseController : MonoBehaviour{
     void Update(){
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(0)) {
             GameController.Instance.MoveToNextState();
             WallCanvas.ResetPaintingNumber();
         }
