@@ -41,12 +41,21 @@ public class RoundController : MonoBehaviour {
     [System.Serializable]
     public struct Painting {
         public Texture2D originalVersion;
-        public Texture2D damagedVersion;
+        public List<Texture2D> damagedVersions;
 
         public Painting(Texture2D originalVersion, Texture2D damagedVersion) {
             this.originalVersion = originalVersion;
-            this.damagedVersion = damagedVersion;
+            //this.damagedVersion = damagedVersion;
+            this.damagedVersions = new List<Texture2D>();
+            this.damagedVersions.Append<Texture2D>(damagedVersion);
         }
+
+        public Painting(Texture2D originalVersion, List<Texture2D> damagedVersions) {
+            this.originalVersion = originalVersion;
+            this.damagedVersions = damagedVersions;
+        }
+
+
     }
 
     private void OnEnable() {
@@ -91,12 +100,13 @@ public class RoundController : MonoBehaviour {
     void NewPainting() {
         if (nextPaintings.Count == 0)
             return;
-            
 
-        int paintingNumber = Random.Range((int)0, (int)nextPaintings.Count);
-        canvasRenderer.material.SetTexture("_MainTex", nextPaintings[paintingNumber].damagedVersion);
-        originalCanvasRenderer.material.SetTexture("_MainTex", nextPaintings[paintingNumber].originalVersion);
-        nextPaintings.RemoveAt(paintingNumber);
+        int basePaintingNumber = Random.Range((int)0, (int)nextPaintings.Count);
+        int damagedPaintingIndex = Random.Range((int)0, (int)nextPaintings[basePaintingNumber].damagedVersions.Count);
+        canvasRenderer.material.SetTexture("_MainTex", nextPaintings[basePaintingNumber].damagedVersions[damagedPaintingIndex]);
+        //canvasRenderer.material.SetTexture("_MainTex", nextPaintings[paintingNumber].damagedVersions);
+        originalCanvasRenderer.material.SetTexture("_MainTex", nextPaintings[basePaintingNumber].originalVersion);
+        nextPaintings.RemoveAt(basePaintingNumber);
     }
 
     void DiscardTool() {

@@ -3025,17 +3025,38 @@ MonoBehaviour:
   originalCanvasRenderer: {fileID: 8913957741508498981}
   paintings:
   - originalVersion: {fileID: 2800000, guid: d619d669d4078e049ad1dc6b573b9c5d, type: 3}
-    damagedVersion: {fileID: 2800000, guid: e92ad4d23882dc7439d0d2678209b3fe, type: 3}
+    damagedVersions:
+    - {fileID: 2800000, guid: 9b4e2d4f3fc77c64d9ae8cf3d8a14437, type: 3}
+    - {fileID: 2800000, guid: d084a2d2f36a5ea478bf627ce51bee7c, type: 3}
+    - {fileID: 2800000, guid: 7180b391c08deb7428229cfff3443b11, type: 3}
+    - {fileID: 2800000, guid: e92ad4d23882dc7439d0d2678209b3fe, type: 3}
   - originalVersion: {fileID: 2800000, guid: a26ceeb12179c754b859e8fd169926e6, type: 3}
-    damagedVersion: {fileID: 2800000, guid: 35f2cfb187e48294c8dc0a67d4171ddd, type: 3}
+    damagedVersions:
+    - {fileID: 2800000, guid: 666b397e05ea1bc4f9f5d706a50c57c9, type: 3}
+    - {fileID: 2800000, guid: 35f2cfb187e48294c8dc0a67d4171ddd, type: 3}
+    - {fileID: 2800000, guid: f65615d34c4997d4ab8e711528167b2c, type: 3}
+    - {fileID: 2800000, guid: 91b0470007731834daf77b49b10c9f0f, type: 3}
+    - {fileID: 2800000, guid: 39e8524dcff9df342bc87bed51b084bb, type: 3}
   - originalVersion: {fileID: 2800000, guid: 23ae557c7b6d58a4b939aff267b194de, type: 3}
-    damagedVersion: {fileID: 2800000, guid: 33c2868652987294eaddb98f409e5977, type: 3}
+    damagedVersions:
+    - {fileID: 2800000, guid: 33c2868652987294eaddb98f409e5977, type: 3}
+    - {fileID: 2800000, guid: d47356644d31f594999a8785a0a6a31b, type: 3}
+    - {fileID: 2800000, guid: e1596d582a05aff469ac988718c78ae1, type: 3}
   - originalVersion: {fileID: 2800000, guid: 26e1cff6dd0992743af1a5cdf00c5c72, type: 3}
-    damagedVersion: {fileID: 2800000, guid: 13af199ba9fad7049adf1c2de9b83b87, type: 3}
+    damagedVersions:
+    - {fileID: 2800000, guid: 13af199ba9fad7049adf1c2de9b83b87, type: 3}
+    - {fileID: 2800000, guid: 5ab08379c94d55144944cc6ddd907422, type: 3}
+    - {fileID: 2800000, guid: 3e567e9cae7ccc643b980ba75053fa1f, type: 3}
+    - {fileID: 2800000, guid: e703ca12f996c124793dc6f59aa1e31e, type: 3}
   - originalVersion: {fileID: 2800000, guid: a45c74c38a4197a4889493d3c5fef08f, type: 3}
-    damagedVersion: {fileID: 2800000, guid: 21c765ee92d63c542b7fbf294ca6dcb3, type: 3}
+    damagedVersions:
+    - {fileID: 2800000, guid: 39dc348889764e1449477098eae00207, type: 3}
+    - {fileID: 2800000, guid: 21c765ee92d63c542b7fbf294ca6dcb3, type: 3}
+    - {fileID: 2800000, guid: 9fe5fbc473f07ee4280b09dc59c23258, type: 3}
   - originalVersion: {fileID: 2800000, guid: 28d4dd4c1c74fc548ae073fea1d11e8b, type: 3}
-    damagedVersion: {fileID: 2800000, guid: 5a999364711a54b4a9dd33f5d26c5823, type: 3}
+    damagedVersions:
+    - {fileID: 2800000, guid: 5a999364711a54b4a9dd33f5d26c5823, type: 3}
+    - {fileID: 2800000, guid: 798219a5acd973041bd5144a05a590e2, type: 3}
   tools:
   - {fileID: 7964556048247748979, guid: 28da5ae797bc3de4ea4f26e9d170293b, type: 3}
   - {fileID: 7265608002683190225, guid: a427bffabfb4f0b42b3c8d6977d11897, type: 3}
